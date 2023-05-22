@@ -1,16 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { QuizContext } from '../../QuizContext';
+import { Link } from 'react-router-dom';
 
 export const Q1 = () => {
   const {
-    currentQuestion,
-    selectedAnswers,
-    handleAnswerSelection,
+    questions,
+    selectedAnswerQ1,
+    setSelectedAnswerQ1
   } = useContext(QuizContext);
 
+  const currentQuestion = questions[0];
+
   const handleSubmit = () => {
-    handleAnswerSelection(selectedAnswers.length);
+    
   };
+  useEffect(()=>{
+    console.log(selectedAnswerQ1)
+  },[selectedAnswerQ1]);
 
   return (
     <div>
@@ -22,8 +28,8 @@ export const Q1 = () => {
               <input
                 type="radio"
                 value={index}
-                onChange={() => handleAnswerSelection(index)}
-                checked={selectedAnswers.includes(index)}
+                onChange={() => setSelectedAnswerQ1([index])}
+                checked={selectedAnswerQ1.includes(index)}
               />
               {answer}
             </label>
@@ -31,6 +37,9 @@ export const Q1 = () => {
         ))}
       </ul>
       <button onClick={handleSubmit}>Submit</button>
+      <Link to='/'>back</Link>
+      <Link to='/'>home</Link>
+      <Link to='/question-2'>next</Link>
     </div>
   );
 };

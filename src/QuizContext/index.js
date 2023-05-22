@@ -4,28 +4,30 @@ import questions from '../Questions';
 export const QuizContext = createContext();
 
 export const QuizProvider = ({ children }) => {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedAnswers, setSelectedAnswers] = useState([]);
-
-  const handleAnswerSelection = (answerIndex) => {
-    setSelectedAnswers([...selectedAnswers, answerIndex]);
-    setCurrentQuestionIndex(currentQuestionIndex + 1);
-  };
+  const [selectedAnswerQ1, setSelectedAnswerQ1] = useState([]);
+  const [selectedAnswerQ2, setSelectedAnswerQ2] = useState([]);
+  const [selectedAnswerQ3, setSelectedAnswerQ3] = useState([]);
+  const [selectedAnswerQ4, setSelectedAnswerQ4] = useState([]);
+  const [selectedAnswerQ5, setSelectedAnswerQ5] = useState([]);
 
   const resetQuiz = () => {
-    setCurrentQuestionIndex(0);
-    setSelectedAnswers([]);
+    setSelectedAnswerQ1([]);
   };
-
-  const currentQuestion = questions[currentQuestionIndex];
 
   return (
     <QuizContext.Provider
       value={{
         questions,
-        currentQuestion,
-        selectedAnswers,
-        handleAnswerSelection,
+        selectedAnswerQ1,
+        setSelectedAnswerQ1,
+        selectedAnswerQ2,
+        setSelectedAnswerQ2,
+        selectedAnswerQ3,
+        setSelectedAnswerQ3,
+        selectedAnswerQ4,
+        setSelectedAnswerQ4,
+        selectedAnswerQ5,
+        setSelectedAnswerQ5,
         resetQuiz,
       }}
     >

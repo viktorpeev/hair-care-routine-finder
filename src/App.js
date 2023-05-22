@@ -3,7 +3,7 @@ import './App.css';
 
 //pages
 import { Homepage } from './Pages/Homepage';
-import { End } from './Pages/End';
+import { Result } from './Pages/Result';
 import { Q1 } from './Pages/Q1';
 import { Q2 } from './Pages/Q2';
 import { Q3 } from './Pages/Q3';
@@ -15,7 +15,7 @@ function App() {
     <div className='main'>
     <Routes>
       <Route exact path='/' element={<Homepage />} />
-      <Route path='/result' element={<End />} />
+      <Route path='/result' element={<Result />} />
       <Route path='/question-1' element={<Q1 />} />
       <Route path='/question-2' element={<Q2 />} />
       <Route path='/question-3' element={<Q3 />} />
