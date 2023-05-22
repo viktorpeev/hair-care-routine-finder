@@ -1,24 +1,29 @@
-import logo from './logo.svg';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+
+//pages
+import { Homepage } from './Pages/Homepage';
+import { End } from './Pages/End';
+import { Q1 } from './Pages/Q1';
+import { Q2 } from './Pages/Q2';
+import { Q3 } from './Pages/Q3';
+import { Q4 } from './Pages/Q4';
+import { Q5 } from './Pages/Q5';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div className='main'>
+    <Routes>
+      <Route exact path='/' element={<Homepage />} />
+      <Route path='/result' element={<End />} />
+      <Route path='/question-1' element={<Q1 />} />
+      <Route path='/question-2' element={<Q2 />} />
+      <Route path='/question-3' element={<Q3 />} />
+      <Route path='/question-4' element={<Q4 />} />
+      <Route path='/question-5' element={<Q5 />} />
+      <Route element={<Homepage />} /> {/* Default route */}
+    </Routes>
+  </div>
   );
 }
 
