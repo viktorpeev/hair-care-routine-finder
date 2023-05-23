@@ -4,6 +4,7 @@ import { Pagination } from '../../Components/Pagination';
 import { useCalculation } from '../../CustomHooks/useCalculation';
 
 export const Result = () => {
+  
   const [productRecommendation, setProductRecommendation] = useState(() => {
     const storedProductRecommendation = localStorage.getItem('productRecommendation');
     return storedProductRecommendation ? JSON.parse(storedProductRecommendation) : [];
@@ -24,7 +25,7 @@ export const Result = () => {
     selectedAnswerQ5,
   } = useContext(QuizContext);
 
-   // Calculate the indexes of the first and last item to display on the current page
+  // Calculate the indexes of the first and last item to display on the current page
   const { currentItems } = useCalculation(currentPage, itemsPerPage, likedItems, productRecommendation);
 
 
@@ -53,9 +54,13 @@ export const Result = () => {
       .catch(error => console.log(error));
   }, [selectedAnswerQ1, selectedAnswerQ2, selectedAnswerQ3, selectedAnswerQ4, selectedAnswerQ5, questions]);
 
+  useEffect(() => {
+    // Update local storage when liked items change
+    localStorage.setItem('likedItems', JSON.stringify(likedItems));
+  }, [likedItems]);
 
   // Change the page
-  const paginate = pageNumber => {
+  const handlePaginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
@@ -73,19 +78,14 @@ export const Result = () => {
       }
     }
   };
-
   const handleSubmit = () => {
     localStorage.clear();
   }
 
-  useEffect(() => {
-    // Update local storage when liked items change
-    localStorage.setItem('likedItems', JSON.stringify(likedItems));
-  }, [likedItems]);
-
   return (
     <div>
-      {currentItems.length > 0 ? (
+      {currentItems.length > 0
+      ? (
         <div>
           <h1>Recommended Products:</h1>
           <ul>
@@ -98,12 +98,12 @@ export const Result = () => {
               </li>
             ))}
           </ul>
-          <Pagination itemsPerPage={itemsPerPage} totalItems={productRecommendation.length} paginate={paginate} />
+          <Pagination itemsPerPage={itemsPerPage} totalItems={productRecommendation.length} paginate={handlePaginate} />
           <button onClick={handleSubmit}>krai</button>
         </div>
-      ) : (
-        <div>No products found.</div>
-      )}
+      )
+      :(<div>No products found.</div>)
+      }
     </div>
   );
 };

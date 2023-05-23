@@ -1,0 +1,40 @@
+.homepage {
+    background-image: url('../../Assets/Rectangle\ 3.png');
+
+    .homepage--heading {
+        width: 583px;
+        height: 88px;
+
+        font-family: 'Grange';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 40px;
+        line-height: 110%;
+        text-align: center;
+
+        color: #FFFFFF;
+
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+    }
+
+    .homepage--description {
+
+        width: 327px;
+        height: 32px;
+
+        font-family: 'Proxima Nova';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 16px;
+        text-align: center;
+
+        color: #FFFFFF;
+
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+    }
+}

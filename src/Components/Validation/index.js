@@ -1,5 +1,4 @@
 export const Validation = (answer, num, navigate, isAnswered) => {
-
     if (answer.length > 0) {
         if (num === 9) {
             if(isAnswered === true){

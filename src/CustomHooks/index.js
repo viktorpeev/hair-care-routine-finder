@@ -1,5 +1,5 @@
-import { Calculation } from "./useCalculation";
+import { useCalculation } from "./useCalculation";
 
 export {
-    Calculation,
+    useCalculation,
 };
