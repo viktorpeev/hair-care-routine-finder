@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import questions from '../Questions';
 
 export const QuizContext = createContext();
@@ -9,9 +9,14 @@ export const QuizProvider = ({ children }) => {
   const [selectedAnswerQ3, setSelectedAnswerQ3] = useState([]);
   const [selectedAnswerQ4, setSelectedAnswerQ4] = useState([]);
   const [selectedAnswerQ5, setSelectedAnswerQ5] = useState([]);
+  const [isAnswered, setIsAnswered] = useState(false);
 
 
-  //handleSubmit(fetch->if('type_${questions[0].answers[0]}'))
+  useEffect(() => {
+    if (selectedAnswerQ1.length > 0){
+      setIsAnswered(true);
+    }
+}, [selectedAnswerQ1.length,selectedAnswerQ5])
 
   const resetQuiz = () => {
     setSelectedAnswerQ1([]);
@@ -31,6 +36,7 @@ export const QuizProvider = ({ children }) => {
         setSelectedAnswerQ4,
         selectedAnswerQ5,
         setSelectedAnswerQ5,
+        isAnswered,
         resetQuiz,
       }}
     >

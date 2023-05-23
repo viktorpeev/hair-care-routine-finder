@@ -1,6 +1,8 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { QuizContext } from '../../QuizContext';
 import { Link } from 'react-router-dom';
+import { Validation } from '../../Components/Validation';
+import { useNavigate } from 'react-router-dom';
 
 export const Q2 = () => {
   const {
@@ -9,14 +11,13 @@ export const Q2 = () => {
     setSelectedAnswerQ2
   } = useContext(QuizContext);
 
+  const navigate = useNavigate();
+
   const currentQuestion = questions[1];
 
-  const handleSubmit = () => {
-    
+  const handleSubmit = async () => {
+    await Validation(selectedAnswerQ2,3,navigate)
   };
-  useEffect(()=>{
-    console.log(selectedAnswerQ2)
-  },[selectedAnswerQ2]);
 
   return (
     <div>
@@ -36,10 +37,10 @@ export const Q2 = () => {
           </li>
         ))}
       </ul>
-      <button onClick={handleSubmit}>Submit</button>
+
       <Link to='/question-1'>back</Link>
       <Link to='/'>home</Link>
-      <Link to='/question-3'>next</Link>
+      <button onClick={handleSubmit}>next</button>
     </div>
   );
 };
