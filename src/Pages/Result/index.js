@@ -1,17 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { QuizContext } from '../../QuizContext';
 import { Pagination } from '../../Components/Pagination';
+import { useCalculation } from '../../CustomHooks/useCalculation';
 
 export const Result = () => {
-  const {
-    questions,
-    selectedAnswerQ1,
-    selectedAnswerQ2,
-    selectedAnswerQ3,
-    selectedAnswerQ4,
-    selectedAnswerQ5,
-  } = useContext(QuizContext);
-
   const [productRecommendation, setProductRecommendation] = useState(() => {
     const storedProductRecommendation = localStorage.getItem('productRecommendation');
     return storedProductRecommendation ? JSON.parse(storedProductRecommendation) : [];
@@ -22,6 +14,20 @@ export const Result = () => {
     const storedLikedItems = localStorage.getItem('likedItems');
     return storedLikedItems ? JSON.parse(storedLikedItems) : [];
   });
+
+  const {
+    questions,
+    selectedAnswerQ1,
+    selectedAnswerQ2,
+    selectedAnswerQ3,
+    selectedAnswerQ4,
+    selectedAnswerQ5,
+  } = useContext(QuizContext);
+
+   // Calculate the indexes of the first and last item to display on the current page
+  const { currentItems } = useCalculation(currentPage, itemsPerPage, likedItems, productRecommendation);
+
+
 
   useEffect(() => {
     fetch('https://jeval.com.au/collections/hair-care/products.json?page=1')
@@ -47,14 +53,6 @@ export const Result = () => {
       .catch(error => console.log(error));
   }, [selectedAnswerQ1, selectedAnswerQ2, selectedAnswerQ3, selectedAnswerQ4, selectedAnswerQ5, questions]);
 
-  // Calculate the indexes of the first and last item to display on the current page
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const likedItemIds = likedItems.map(item => item.id);
-  const likedItemsPerPage = likedItems.filter(item => productRecommendation.find(product => product.id === item.id));
-  const remainingItems = productRecommendation.filter(item => !likedItemIds.includes(item.id));
-  const currentItems = [...likedItemsPerPage, ...remainingItems].slice(indexOfFirstItem, indexOfLastItem);
-
 
   // Change the page
   const paginate = pageNumber => {
@@ -65,7 +63,8 @@ export const Result = () => {
   const handleLike = (itemId) => {
     if (likedItems.find(item => item.id === itemId)) {
       // Unlike item
-      setLikedItems(likedItems.filter(item => item.id !== itemId));
+      const unlike = likedItems.filter(item => item.id !== itemId);
+      setLikedItems(unlike);
     } else {
       // Like item
       const likedItem = productRecommendation.find(item => item.id === itemId);
@@ -75,7 +74,7 @@ export const Result = () => {
     }
   };
 
-  const handleSubmit = () =>{
+  const handleSubmit = () => {
     localStorage.clear();
   }
 
