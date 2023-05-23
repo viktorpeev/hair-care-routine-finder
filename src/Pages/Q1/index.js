@@ -24,7 +24,7 @@ export const Q1 = () => {
       <ul>
         {currentQuestion.answers.map((answer, index) => (
           <li key={index}>
-            <label>
+            <label style={{ textTransform: 'capitalize' }}>
               <input
                 type="radio"
                 value={index}

@@ -10,6 +10,9 @@ export const QuizProvider = ({ children }) => {
   const [selectedAnswerQ4, setSelectedAnswerQ4] = useState([]);
   const [selectedAnswerQ5, setSelectedAnswerQ5] = useState([]);
 
+
+  //handleSubmit(fetch->if('type_${questions[0].answers[0]}'))
+
   const resetQuiz = () => {
     setSelectedAnswerQ1([]);
   };

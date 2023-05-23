@@ -9,7 +9,7 @@ export const Q2 = () => {
     setSelectedAnswerQ2
   } = useContext(QuizContext);
 
-  const currentQuestion = questions[0];
+  const currentQuestion = questions[1];
 
   const handleSubmit = () => {
     
