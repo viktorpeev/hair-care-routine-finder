@@ -1,0 +1,31 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .page-item {
+    display: inline-block;
+    margin: 0 5px;
+  }
+  
+  .page-link {
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .circle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 25px;
+    color: #fff;
+    background-color: #ccc;
+  }
+  
+  .page-item.active .circle {
+    background-color: #5BC1ED;
+  }
+  

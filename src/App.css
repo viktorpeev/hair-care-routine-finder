@@ -32,7 +32,29 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.nav-next-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 80px;
+  gap: 8px;
+
+  background-color: #C3EDFF;
+  border: 1px solid #C3EDFF;
+  border-radius: 8px;
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  place-content: center;
+
+  text-decoration: none;
+
+  cursor: pointer;
 }

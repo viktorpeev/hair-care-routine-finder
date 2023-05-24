@@ -1,9 +1,7 @@
 import React, { useContext } from 'react';
 import { QuizContext } from '../../QuizContext';
-import { Link } from 'react-router-dom';
-import { Validation } from '../../Components/Validation';
-import { useNavigate } from 'react-router-dom';
 import './styles.scss';
+import { Navigation } from '../../Components/Navigation';
 
 export const Q4 = () => {
   const {
@@ -12,13 +10,8 @@ export const Q4 = () => {
     setSelectedAnswerQ4
   } = useContext(QuizContext);
 
-  const navigate = useNavigate();
-
   const currentQuestion = questions[3];
 
-  const handleSubmit = async () => {
-    await Validation(selectedAnswerQ4,5,navigate)
-  };
 
   const handleLiClick = (index) => {
     const inputId = `input-${index}`;
@@ -48,11 +41,13 @@ export const Q4 = () => {
             </label>
           </li>
         ))}
+        <div class="circle"></div>
       </ul>
 
-      <Link to='/question-2'>back</Link>
-      <Link to='/'>home</Link>
-      <button onClick={handleSubmit}>next</button>
+      <Navigation
+      answer={selectedAnswerQ4}
+      index={5}
+      />
     </div>
   );
 };

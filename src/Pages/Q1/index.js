@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 import { QuizContext } from '../../QuizContext';
-import { Link } from 'react-router-dom';
-import { Validation } from '../../Components/Validation';
-import { useNavigate } from 'react-router-dom';
+import { Navigation } from '../../Components/Navigation';
+
 import './styles.scss';
 
 export const Q1 = () => {
@@ -12,13 +11,7 @@ export const Q1 = () => {
     setSelectedAnswerQ1
   } = useContext(QuizContext);
 
-  const navigate = useNavigate();
-
   const currentQuestion = questions[0];
-
-  const handleSubmit = async () => {
-    await Validation(selectedAnswerQ1,2,navigate)
-  };
 
   const handleLiClick = (index) => {
     const inputId = `input-${index}`;
@@ -34,7 +27,7 @@ export const Q1 = () => {
       <ul className='questionOne__answerList'>
         {currentQuestion.answers.map((answer, index) => (
           <li key={index} onClick={() => handleLiClick(index)}
-          className={selectedAnswerQ1.includes(index) ? 'selected' : ''}
+            className={selectedAnswerQ1.includes(index) ? 'selected' : ''}
           >
             <label htmlFor={`input-${index}`} style={{ textTransform: 'capitalize' }}>
               <input
@@ -48,11 +41,12 @@ export const Q1 = () => {
             </label>
           </li>
         ))}
+          <div class="circle"></div>
       </ul>
-
-      <Link to='/'>back</Link>
-      <Link to='/'>home</Link>
-      <button onClick={handleSubmit}>next</button>
+      <Navigation
+        answer={selectedAnswerQ1}
+        index={2}
+      />
     </div>
   );
 };

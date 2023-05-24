@@ -1,6 +1,6 @@
 export const Validation = (answer, num, navigate, isAnswered) => {
     if (answer.length > 0) {
-        if (num === 9) {
+        if (num === 6) {
             if(isAnswered === true){
             navigate(`/result`);
             }
