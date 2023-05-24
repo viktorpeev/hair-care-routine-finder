@@ -3,6 +3,7 @@ import { QuizContext } from '../../QuizContext';
 import { Link } from 'react-router-dom';
 import { Validation } from '../../Components/Validation';
 import { useNavigate } from 'react-router-dom';
+import './styles.scss';
 
 export const Q3 = () => {
   const {
@@ -19,24 +20,33 @@ export const Q3 = () => {
     await Validation(selectedAnswerQ3,4,navigate)
   };
 
-  useEffect(()=>{
-    console.log(`${questions[2].answers[selectedAnswerQ3]}`);
-  },[selectedAnswerQ3,questions])
+  useEffect(()=>{console.log(selectedAnswerQ3)},[selectedAnswerQ3])
+
+  const handleLiClick = (index) => {
+    const inputId = `input-${index}`;
+    const inputElement = document.getElementById(inputId);
+    if (inputElement) {
+      inputElement.click();
+    }
+  };
 
   return (
-    <div>
-      <h1>{currentQuestion.question}</h1>
-      <ul>
+    <div className='questionThree'>
+      <h1 className='questionThree--heading'>{currentQuestion.question}</h1>
+      <ul className='questionThree__answerList'>
         {currentQuestion.answers.map((answer, index) => (
-          <li key={index}>
-            <label>
+          <li key={index} onClick={() => handleLiClick(index)}
+          className={selectedAnswerQ3.includes(index) ? 'selected' : ''}
+          >
+            <label htmlFor={`input-${index}`} style={{ textTransform: 'capitalize' }}>
               <input
+                id={`input-${index}`}
                 type="radio"
                 value={index}
                 onChange={() => setSelectedAnswerQ3([index])}
                 checked={selectedAnswerQ3.includes(index)}
               />
-              {answer}
+              <span>{answer}</span>
             </label>
           </li>
         ))}

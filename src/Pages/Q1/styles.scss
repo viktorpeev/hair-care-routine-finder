@@ -24,9 +24,13 @@
 
     .questionOne__answerList {
         display: flex;
-        justify-content: space-evenly;
-        list-style: none;
-        width:780px;
+        list-style: lower-alpha;
+        list-style-position:inside;
+        width:850px;
+
+        flex-wrap: wrap;
+        gap: 15px;
+        place-content: center;
 
 
         input[type="radio"] {
@@ -36,9 +40,11 @@
         li{
             border: 2px solid #C3EDFF;
             border-radius: 5px;
-            padding: 10px 9%;
+            padding: 10px;
+            min-width: 130px;
             transition: 0.5s ease;
             
+
             &:hover{
                 background-color: #C3EDFF;
             }

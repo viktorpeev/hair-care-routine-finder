@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { QuizContext } from '../../QuizContext';
 import { Link } from 'react-router-dom';
 import { Validation } from '../../Components/Validation';
 import { useNavigate } from 'react-router-dom';
+import './styles.scss';
 
 export const Q2 = () => {
   const {
@@ -19,14 +20,27 @@ export const Q2 = () => {
     await Validation(selectedAnswerQ2,3,navigate)
   };
 
+  useEffect(()=>{console.log(selectedAnswerQ2)},[selectedAnswerQ2])
+
+  const handleLiClick = (index) => {
+    const inputId = `input-${index}`;
+    const inputElement = document.getElementById(inputId);
+    if (inputElement) {
+      inputElement.click();
+    }
+  };
+
   return (
-    <div>
-      <h1>{currentQuestion.question}</h1>
-      <ul>
+    <div className='questionTwo'>
+      <h1 className='questionTwo--heading'>{currentQuestion.question}</h1>
+      <ul className='questionTwo__answerList'>
         {currentQuestion.answers.map((answer, index) => (
-          <li key={index}>
-            <label>
+          <li key={index} onClick={() => handleLiClick(index)}
+          className={selectedAnswerQ2.includes(index) ? 'selected' : ''}
+          >
+            <label htmlFor={`input-${index}`} style={{ textTransform: 'capitalize' }}>
               <input
+                id={`input-${index}`}
                 type="radio"
                 value={index}
                 onChange={() => setSelectedAnswerQ2([index])}
