@@ -6,7 +6,7 @@ export const useCalculation = (currentPage, itemsPerPage, likedItems, productRec
     const remainingItems = productRecommendation.filter(item => !likedItemIds.includes(item.id));
     const currentItems = [...likedItemsPerPage, ...remainingItems].slice(indexOfFirstItem, indexOfLastItem);
 
-    const res={indexOfLastItem,indexOfFirstItem,likedItemIds,likedItemsPerPage,remainingItems,currentItems}
+    const res={currentItems}
 
     return res;
 }

@@ -2,19 +2,20 @@ import React, { useEffect, useState, useContext } from 'react';
 import { QuizContext } from '../../QuizContext';
 import { Pagination } from '../../Components/Pagination';
 import { useCalculation } from '../../CustomHooks/useCalculation';
+import './styles.scss';
 
 export const Result = () => {
-  
+
   const [productRecommendation, setProductRecommendation] = useState(() => {
     const storedProductRecommendation = localStorage.getItem('productRecommendation');
     return storedProductRecommendation ? JSON.parse(storedProductRecommendation) : [];
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(2);
-  const [likedItems, setLikedItems] = useState(() => {
+  const [likedItems, setLikedItems] = useState([() => {
     const storedLikedItems = localStorage.getItem('likedItems');
     return storedLikedItems ? JSON.parse(storedLikedItems) : [];
-  });
+  }]);
 
   const {
     questions,
@@ -66,15 +67,16 @@ export const Result = () => {
 
   // Handle item like/unlike
   const handleLike = (itemId) => {
-    if (likedItems.find(item => item.id === itemId)) {
-      // Unlike item
-      const unlike = likedItems.filter(item => item.id !== itemId);
-      setLikedItems(unlike);
-    } else {
-      // Like item
-      const likedItem = productRecommendation.find(item => item.id === itemId);
-      if (likedItem) {
-        setLikedItems([...likedItems, { id: likedItem.id, status: 'liked', title: likedItem.title }]);
+    const likedItem = productRecommendation.find(item => item.id === itemId);
+    if (likedItem) {
+      const updatedItem = { ...likedItem, status: 'liked' };
+      if (likedItems.find(item => item.id === itemId)) {
+        // Unlike item
+        const unlike = likedItems.filter(item => item.id !== itemId);
+        setLikedItems(unlike);
+      } else {
+        // Like item
+        setLikedItems([...likedItems, updatedItem]);
       }
     }
   };
@@ -83,26 +85,38 @@ export const Result = () => {
   }
 
   return (
-    <div>
+    <div className='result'>
+      <h1 className='result--heading'>Build you everyday self care routine.</h1>
+      <p className='result--description'>Perfect for if you're looking for soft, nourished skin, our moisturizing body washes are made with skin-natural nutrients that work with your skin to replenish moisture. With a light formula, the bubbly lather leaves your skin feeling cleansed and cared for. And by choosing relaxing fragrances you can add a moment of calm to the end of your day.</p>
+      <button onClick={handleSubmit} className="result__button">
+        <span className='result__button--text'>Retake the quiz</span>
+      </button>
       {currentItems.length > 0
-      ? (
-        <div>
-          <h1>Recommended Products:</h1>
-          <ul>
-            {currentItems.map(product => (
-              <li key={product.id}>
-                {product.title}
-                <button onClick={() => handleLike(product.id)}>
-                  {likedItems.find(item => item.id === product.id) ? 'Unlike' : 'Like'}
-                </button>
-              </li>
-            ))}
-          </ul>
-          <Pagination itemsPerPage={itemsPerPage} totalItems={productRecommendation.length} paginate={handlePaginate} />
-          <button onClick={handleSubmit}>krai</button>
-        </div>
-      )
-      :(<div>No products found.</div>)
+        ? (
+          <div className='result__recomendedProductsCarousel'>
+            <ul className='result__recomendedProductsCarousel__products'>
+              {currentItems.map(product => (
+                <li key={product.id}
+                  className='result__recomendedProductsCarousel__products__singleProduct'
+                >
+                  <img src={product.images[0].src} alt='Rectangle 1' />
+                  <span>{product.title}</span>
+                  <span>{product.variants[0].price}</span>
+                    <i onClick={() => handleLike(product.id)} className=
+                    {likedItems.find(item => item.id === product.id)
+                      ? 'selected fa fa-heart-o'
+                      : 'fa fa-heart-o'}
+                    ></i>
+                </li>
+              ))}
+            </ul>
+            <Pagination
+              itemsPerPage={itemsPerPage}
+              totalItems={productRecommendation.length}
+              paginate={handlePaginate} />
+          </div>
+        )
+        : (<div>No products found.</div>)
       }
     </div>
   );

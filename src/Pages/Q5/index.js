@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { QuizContext } from '../../QuizContext';
 import { Link } from 'react-router-dom';
 import { Validation } from '../../Components/Validation';
@@ -20,8 +20,6 @@ export const Q5 = () => {
   const handleSubmit = async () => {
     await Validation(selectedAnswerQ5,9,navigate,isAnswered)
   };
-
-  useEffect(()=>{console.log(selectedAnswerQ5)},[selectedAnswerQ5])
 
   const handleLiClick = (index) => {
     const inputId = `input-${index}`;
