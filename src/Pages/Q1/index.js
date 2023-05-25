@@ -25,8 +25,8 @@ export const Q1 = () => {
 
   return (
     <div className='questionOne'>
-      {errors ? <h1 style={{color:'red'}}>{errors} </h1> : null}
-      <h1 className='questionOne--heading'>{currentQuestion.question}</h1>
+      {errors ? <h1 style={{ color: 'red' }}>{errors} </h1> : null}
+        <h1 className='questionOne--heading'>{currentQuestion.question}</h1>
       <ul className='questionOne__answerList'>
         {currentQuestion.answers.map((answer, index) => (
           <li key={index} onClick={() => handleLiClick(index)}
@@ -44,7 +44,7 @@ export const Q1 = () => {
             </label>
           </li>
         ))}
-        <div className="circle"></div>
+      <div className="circle"></div>
       </ul>
       <Navigation
         answer={selectedAnswerQ1}

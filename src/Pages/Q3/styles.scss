@@ -5,74 +5,70 @@
     justify-content: center;
     align-items: center;
     gap: 15px;
-
+  
     .questionThree--heading {
-        width: 500px;
-        height: 88px;
-
-        font-family: 'Grange';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 40px;
-        line-height: 110%;
-        /* or 44px */
-
-        text-align: center;
-
-        color: #1C2635;
+      width: 90%;
+      max-width: 500px;
+      height: auto;
+      font-family: 'Grange';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 40px;
+      line-height: 110%;
+      text-align: center;
+      color: #1C2635;
     }
-
+  
     .questionThree__answerList {
-        display: flex;
-        list-style: lower-alpha;
-        list-style-position: inside;
-        width: 850px;
-
-        flex-wrap: wrap;
-        gap: 15px;
-        place-content: center;
-
-
-        input[type="radio"] {
-            display: none;
+      display: flex;
+      position: relative;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      align-items: center;
+      width: 90%;
+      max-width: 850px;
+      list-style: lower-alpha;
+      list-style-position: inside;
+  
+      input[type="radio"] {
+        display: none;
+      }
+  
+      li {
+        border: 2px solid #C3EDFF;
+        border-radius: 5px;
+        padding: 10px;
+        min-width: 130px;
+        transition: 0.5s ease;
+  
+        &:hover {
+          background-color: #C3EDFF;
         }
-
-        li {
-            border: 2px solid #C3EDFF;
-            border-radius: 5px;
-            padding: 10px;
-            min-width: 130px;
-            transition: 0.5s ease;
-
-            &:hover {
-                background-color: #C3EDFF;
-            }
-        }
-
-        li,
+  
         label {
-            cursor: pointer;
+          cursor: pointer;
+          text-transform: capitalize;
         }
-
-        .selected {
-            background-color: #C3EDFF;
+  
+        &.selected {
+          background-color: #C3EDFF;
         }
+      }
     }
-
+  
     .circle {
         width: 100px;
         height: 100px;
         border-radius: 50%;
-        position: relative;
+        position: absolute;
+        left: 55rem;
+        transform: translateY(-50%);
         overflow: hidden;
         background: conic-gradient(#AADDF3 60%, #EEF7FB 0);
-        top:0;
-        position: absolute;
-        margin-top: 300px;
-        margin-left: 1000px;
-    }
-
-    .circle::before {
+      }
+    
+      .circle::before {
         content: "";
         position: absolute;
         top: 5%;
@@ -81,9 +77,9 @@
         height: 90%;
         border-radius: 50%;
         background-color: white;
-    }
-
-    .circle::after {
+      }
+    
+      .circle::after {
         content: "3/5";
         position: absolute;
         top: 50%;
@@ -92,5 +88,16 @@
         font-size: 14px;
         font-weight: bold;
         color: black;
-    }
-}
+      }
+
+      @media (max-width: 1000px) {
+        .circle{
+            top: 25%;
+            left: auto;
+        }
+        .questionThree__answerList{
+            position: static;
+        }
+      }
+  }
+  
