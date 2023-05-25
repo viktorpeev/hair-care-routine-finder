@@ -16,7 +16,7 @@ export const Result = () => {
     const storedLikedItems = localStorage.getItem('likedItems');
     return storedLikedItems ? JSON.parse(storedLikedItems) : [];
   });
-  const[status,setStatus] = useState('Loading...');
+  const [status, setStatus] = useState('Loading...');
 
   const navigate = useNavigate();
 
@@ -49,7 +49,7 @@ export const Result = () => {
           setProductRecommendation(tagProducts);
           localStorage.setItem('productRecommendation', JSON.stringify(tagProducts));
         }
-        else{
+        else {
           setStatus('No products found.')
         }
       })
@@ -119,7 +119,7 @@ export const Result = () => {
               >
                 <img src={product.images[0].src} alt='Rectangle 1' />
                 <span>{product.title}</span>
-                <span>$ {product.variants[0].price}</span>
+                <span style={{ fontSize: '18px', fontWeight: 100 }}>$ {product.variants[0].price}</span>
                 <i
                   onClick={() => handleLike(product.id)}
                   className={
@@ -131,8 +131,8 @@ export const Result = () => {
               </li>
             ))}
             <button onClick={handleNextPage} className="next-button">
-            <i className="fa fa-chevron-right" aria-hidden="true"></i>
-          </button>
+              <i className="fa fa-chevron-right" aria-hidden="true"></i>
+            </button>
           </ul>
           <Pagination
             itemsPerPage={itemsPerPage}
