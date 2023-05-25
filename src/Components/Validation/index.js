@@ -1,11 +1,11 @@
-export const Validation = (answer, num, navigate, isAnswered) => {
+export const Validation = (answer, num, navigate, isAnswered, setErrors) => {
     if (answer.length > 0) {
         if (num === 6) {
             if(isAnswered === true){
             navigate(`/result`);
             }
             else{
-                console.log('Please go back and check if you have given an answer for every question')
+                setErrors('Please go back and check if you have given an answer to every question')
             }
         }
         else{
@@ -13,6 +13,6 @@ export const Validation = (answer, num, navigate, isAnswered) => {
         }
     }
     else {
-        console.log('Please check if you have ' + answer)
+        setErrors('Please select an answer');
     }
 };

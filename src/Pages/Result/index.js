@@ -26,6 +26,7 @@ export const Result = () => {
     selectedAnswerQ3,
     selectedAnswerQ4,
     selectedAnswerQ5,
+    resetQuiz
   } = useContext(QuizContext);
 
   useEffect(() => {
@@ -80,6 +81,7 @@ export const Result = () => {
   // Redirect to homepage
   const handleSubmit = () => {
     localStorage.clear();
+    resetQuiz();
     navigate('/');
   };
 

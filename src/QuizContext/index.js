@@ -9,6 +9,7 @@ export const QuizProvider = ({ children }) => {
   const [selectedAnswerQ3, setSelectedAnswerQ3] = useState([]);
   const [selectedAnswerQ4, setSelectedAnswerQ4] = useState([]);
   const [selectedAnswerQ5, setSelectedAnswerQ5] = useState([]);
+  const [errors, setErrors] = useState();
   const [isAnswered, setIsAnswered] = useState(false);
 
 
@@ -18,8 +19,17 @@ export const QuizProvider = ({ children }) => {
     }
 }, [selectedAnswerQ1.length,selectedAnswerQ5])
 
+useEffect(() => {
+  setErrors();
+}, [selectedAnswerQ1,selectedAnswerQ2,selectedAnswerQ3,selectedAnswerQ4,selectedAnswerQ5])
+
+
   const resetQuiz = () => {
     setSelectedAnswerQ1([]);
+    setSelectedAnswerQ2([]);
+    setSelectedAnswerQ3([]);
+    setSelectedAnswerQ4([]);
+    setSelectedAnswerQ5([]);
   };
 
   return (
@@ -37,6 +47,8 @@ export const QuizProvider = ({ children }) => {
         selectedAnswerQ5,
         setSelectedAnswerQ5,
         isAnswered,
+        errors,
+        setErrors,
         resetQuiz,
       }}
     >

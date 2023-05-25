@@ -8,10 +8,12 @@ export const Q1 = () => {
   const {
     questions,
     selectedAnswerQ1,
-    setSelectedAnswerQ1
+    setSelectedAnswerQ1,
+    errors
   } = useContext(QuizContext);
 
   const currentQuestion = questions[0];
+
 
   const handleLiClick = (index) => {
     const inputId = `input-${index}`;
@@ -23,6 +25,7 @@ export const Q1 = () => {
 
   return (
     <div className='questionOne'>
+      {errors ? <h1 style={{color:'red'}}>{errors} </h1> : null}
       <h1 className='questionOne--heading'>{currentQuestion.question}</h1>
       <ul className='questionOne__answerList'>
         {currentQuestion.answers.map((answer, index) => (
@@ -41,7 +44,7 @@ export const Q1 = () => {
             </label>
           </li>
         ))}
-          <div class="circle"></div>
+        <div className="circle"></div>
       </ul>
       <Navigation
         answer={selectedAnswerQ1}

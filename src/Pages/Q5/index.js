@@ -8,7 +8,8 @@ export const Q5 = () => {
     questions,
     isAnswered,
     selectedAnswerQ5,
-    setSelectedAnswerQ5
+    setSelectedAnswerQ5,
+    errors
   } = useContext(QuizContext);
 
   const currentQuestion = questions[4];
@@ -23,6 +24,7 @@ export const Q5 = () => {
 
   return (
     <div className='questionFive'>
+      {errors ? <h1 style={{color:'red'}}>{errors} </h1> : null}
       <h1 className='questionFive--heading'>{currentQuestion.question}</h1>
       <ul className='questionFive__answerList'>
         {currentQuestion.answers.map((answer, index) => (
@@ -41,7 +43,7 @@ export const Q5 = () => {
             </label>
           </li>
         ))}
-        <div class="circle"></div>
+        <div className="circle"></div>
       </ul>
 
       <Navigation
