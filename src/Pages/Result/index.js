@@ -16,6 +16,7 @@ export const Result = () => {
     const storedLikedItems = localStorage.getItem('likedItems');
     return storedLikedItems ? JSON.parse(storedLikedItems) : [];
   });
+  const[status,setStatus] = useState('Loading...');
 
   const navigate = useNavigate();
 
@@ -47,6 +48,9 @@ export const Result = () => {
         if (tagProducts.length > 0) {
           setProductRecommendation(tagProducts);
           localStorage.setItem('productRecommendation', JSON.stringify(tagProducts));
+        }
+        else{
+          setStatus('No products found.')
         }
       })
       .catch(error => console.log(error));
@@ -139,7 +143,7 @@ export const Result = () => {
           />
         </div>
       ) : (
-        <div>No products found.</div>
+        <div>{status}</div>
       )}
     </div>
   );
